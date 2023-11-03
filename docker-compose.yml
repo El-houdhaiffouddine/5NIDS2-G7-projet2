@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  app:
+    image: b2ben/ElhoudhaiffouddineBenSidi-5NIDS2-G7-projet2:1.0.0
+    restart: unless-stopped
+    ports:
+      - "8084:8084"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/kaddemdb?useUnicode=true&createDatabaseIfNotExist=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: secret
+    depends_on:
+      - mysqldb
+    volumes:
+      - kaddemdatabase:/tmp/data
+    networks:
+      - my-network
+
+  mysqldb:
+    image: mysql:8.0
+    volumes:
+      - kaddemdb:/tmp/database
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: stationSki
+    networks:
+      - my-network
+
+
+volumes:
+  kaddemdatabase:
+  kaddemdb:
+
+networks:
+  my-network:
+    driver: bridge
+      # ipam:
+      # driver: default
+      # config:
+      #  - subnet: 192.168.1.0/24
+    #    gateway: 192.168.1.1
