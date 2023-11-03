@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   app:
-    image: b2ben/ElhoudhaiffouddineBenSidi-5NIDS2-G7-projet2:1.0.0
+    image: b2ben/elhoudhaiffouddinebensidi-5nids2-g7-projet2:1.0.0
     restart: unless-stopped
     ports:
       - "8084:8084"
