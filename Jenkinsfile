@@ -67,7 +67,7 @@ pipeline {
 
         stage('MAIL') {
               steps {
-                    mail bcc: '', body: '''<!DOCTYPE html>
+                    emailext body: '''<!DOCTYPE html>
                     <html lang="en">
                     <head>
                         <meta charset="UTF-8">
@@ -95,7 +95,7 @@ pipeline {
                           </div>
 
                     </body>
-                    </html>''', cc: '', from: '', replyTo: '', subject: 'OBJET: Erreur d\'exécution du pipeline Jenkins $BUILD_NUMBER', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
+                    </html>''', mimeType: 'text/html', recipientProviders: [contributor()], subject: 'Object: Error d\'exécution du pipeline Jenkins', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
               }
         }
     }
