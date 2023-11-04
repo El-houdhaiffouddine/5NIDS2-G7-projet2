@@ -67,36 +67,35 @@ pipeline {
 
         stage('MAIL') {
               steps {
-                    emailext body: '''<!DOCTYPE html>
-                    <html lang="fr">
+                    mail bcc: '', body: '''<!DOCTYPE html>
+                    <html lang="en">
                     <head>
-                      <meta charset="UTF-8">
-                      <title>Erreur dans le pipeline</title>
+                        <meta charset="UTF-8">
+                        <title>Title</title>
                     </head>
                     <body>
-                      <div class="container" style="width: 600px; margin: 0 auto;">
-                        <h1 style="font-size: 24px; margin-top: 0;">$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:</h1>
-                        <h1 style="font-size: 24px; margin-top: 0;">Erreur dans le pipeline</h1>
-                        <p style="margin-bottom: 10px;">
-                          Une erreur s\'est produite dans le pipeline. Voici les informations sur l\'erreur :
-                        </p>
-                        <ul style="list-style-type: none; margin: 0; padding: 0;">
-                          <li>
-                            <strong style="font-weight: bold;">Erreur :</strong> {{ erreur }}
-                          </li>
-                          <li>
-                            <strong style="font-weight: bold;">Source :</strong> {{ source }}
-                          </li>
-                          <li>
-                            <strong style="font-weight: bold;">Date :</strong> {{ date }}
-                          </li>
-                        </ul>
-                        <p style="margin-bottom: 10px;">
-                          Pour plus d\'informations, veuillez consulter le lien suivant du pipeline: <a href="$BUILD_URL">$BUILD_URL</a>
-                        </p>
-                      </div>
+                          <div class="container" style="width: 600px; margin: 0 auto;">
+                              <a href="index.html"><img src="https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fthumb%2Fe%2Fe3%2FJenkins_logo_with_title.svg%2F2560px-Jenkins_logo_with_title.svg.png&tbnid=zqETvMozVO9CwM&vet=12ahUKEwiRyt6EjKuCAxUyi_0HHYPRDxoQMygCegQIARBL..i&imgrefurl=https%3A%2F%2Far.m.wikipedia.org%2Fwiki%2F%25D9%2585%25D9%2584%25D9%2581%3AJenkins_logo_with_title.svg&docid=M470kGQboPYC8M&w=2560&h=824&q=jenkins%20image%20olog&ved=2ahUKEwiRyt6EjKuCAxUyi_0HHYPRDxoQMygCegQIARBL" alt="Your Logo" style="display: block; margin: 0 auto;"></a>
+                              <h1 style="font-size: 24px; margin-top: 0; color: blueviolet; ">$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:</h1>
+                              <h2 style="font-size: 24px; margin-top: 0; color: red;">Erreur dans le pipeline</h2>
+                              <p style="margin-bottom: 10px;">
+                                  Une erreur s\\\'est produite dans le pipeline. Voici les informations sur l\\\'erreur :
+                              </p>
+                              <ul style="list-style-type: none; margin: 0; padding: 0;">
+                                  <li>
+                                      <strong style="font-weight: bold;">Erreur :</strong> <p style="color: blue;">$ERROR_MESSAGE</p>
+                                  </li>
+                                  <li>
+                                      <strong style="font-weight: bold;">Source :</strong> <p style="color: blue;">$BUILD_URL</p>
+                                  </li>
+                                  <li>
+                                      <strong style="font-weight: bold;">Date :</strong> <p style="color: blue;">$BUILD_ID</p>
+                                  </li>
+                              </ul>
+                          </div>
+
                     </body>
-                    </html>''', recipientProviders: [contributor()], subject: 'Jenkins email sending test', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
+                    </html>''', cc: '', from: '', replyTo: '', subject: '', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
               }
         }
     }
