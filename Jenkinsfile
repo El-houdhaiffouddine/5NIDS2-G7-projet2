@@ -75,6 +75,7 @@ pipeline {
                     </head>
                     <body>
                       <div class="container" style="width: 600px; margin: 0 auto;">
+                        <h1 style="font-size: 24px; margin-top: 0;">$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:</h1>
                         <h1 style="font-size: 24px; margin-top: 0;">Erreur dans le pipeline</h1>
                         <p style="margin-bottom: 10px;">
                           Une erreur s\'est produite dans le pipeline. Voici les informations sur l\'erreur :
@@ -91,7 +92,7 @@ pipeline {
                           </li>
                         </ul>
                         <p style="margin-bottom: 10px;">
-                          Pour plus d\'informations, veuillez consulter les logs du pipeline.
+                          Pour plus d\'informations, veuillez consulter le lien suivant du pipeline: <a href="$BUILD_URL">$BUILD_URL</a>
                         </p>
                       </div>
                     </body>
