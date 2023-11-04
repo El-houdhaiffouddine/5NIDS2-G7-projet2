@@ -95,7 +95,7 @@ pipeline {
                           </div>
 
                     </body>
-                    </html>''', mimeType: 'multipart/mixed', subject: 'Objet: Echec d\'exécution du pipeline Jenkins', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
+                    </html>''', mimeType: 'text/html', subject: 'Objet: Echec d\'exécution du pipeline Jenkins', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
               }
         }
     }
