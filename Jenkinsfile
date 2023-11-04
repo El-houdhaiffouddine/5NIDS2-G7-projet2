@@ -58,10 +58,10 @@ pipeline {
 
         stage('GRAFANA') {
               steps {
-                    shell(command: 'nohup ./prometheus &', workingDirectory: '/opt/prometheus-2.48.0-rc.2.linux-amd64')
-                    shell(command: 'nohup ./grafana server &', workingDirectory: '/opt/grafana-10.2.0/bin')
-                    //sh '/opt/prometheus-2.48.0-rc.2.linux-amd64/prometheus --config.file=/opt/prometheus-2.48.0-rc.2.linux-amd64/prometheus.yml '
-                    //sh '/opt/grafana-10.2.0/bin/grafana server --homepath=/opt/grafana-10.2.0 '
+                    //shell(command: 'nohup ./prometheus &', workingDirectory: '/opt/prometheus-2.48.0-rc.2.linux-amd64')
+                    //shell(command: 'nohup ./grafana server &', workingDirectory: '/opt/grafana-10.2.0/bin')
+                    sh '/opt/prometheus-2.48.0-rc.2.linux-amd64/prometheus --config.file=/opt/prometheus-2.48.0-rc.2.linux-amd64/prometheus.yml &'
+                    sh '/opt/grafana-10.2.0/bin/grafana server --homepath=/opt/grafana-10.2.0 &'
               }
         }
     }
