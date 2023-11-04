@@ -75,7 +75,7 @@ pipeline {
                     </head>
                     <body>
                           <div class="container" style="width: 600px; margin: 0 auto;">
-                              <a href="index.html"><img src="https://wiki.jenkins-ci.org/JENKINS/attachments/2916393/57409619.png" alt="Your Logo" style="display: block; margin: 0 auto;"></a>
+                              <a><img src="https://wiki.jenkins-ci.org/JENKINS/attachments/2916393/57409619.png" alt="Jenkins Logo" style="display: block; margin: 0 auto;"></a>
                               <h1 style="font-size: 24px; margin-top: 0; color: blueviolet; ">$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:</h1>
                               <h2 style="font-size: 24px; margin-top: 0; color: red;">Erreur dans le pipeline</h2>
                               <p style="margin-bottom: 10px;">
@@ -83,19 +83,19 @@ pipeline {
                               </p>
                               <ul style="list-style-type: none; margin: 0; padding: 0;">
                                   <li>
-                                      <strong style="font-weight: bold;">Erreur :</strong> <mark style="color: red;">$BUILD_LOG</mark>
+                                      <strong style="font-weight: bold;">Erreur(s) :</strong> <mark style="color: red;">$BUILD_LOG</mark>
                                   </li>
                                   <li>
                                       <strong style="font-weight: bold;"> Source :</strong> <mark style="color: blue;">$BUILD_URL</mark>
                                   </li>
                                   <li>
-                                      <strong style="font-weight: bold; color: blue;">Date :</strong> <mark style="color: blue;">$BUILD_ID</mark>
+                                      <strong style="font-weight: bold; color: blue;">Projet :</strong> <mark style="color: blue;">$JOB_NAME</mark>
                                   </li>
                               </ul>
                           </div>
 
                     </body>
-                    </html>''', mimeType: 'text/html', subject: 'Objet: Echec d\'exécution du pipeline Jenkins', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
+                    </html>''', mimeType: 'multipart/mixed', subject: 'Objet: Echec d\'exécution du pipeline Jenkins', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
               }
         }
     }
