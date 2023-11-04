@@ -95,7 +95,7 @@ pipeline {
                           </div>
 
                     </body>
-                    </html>''', cc: '', from: '', replyTo: '', subject: '', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
+                    </html>''', cc: '', from: '', replyTo: '', subject: 'OBJET: Erreur d\'exécution du pipeline Jenkins $BUILD_NUMBER', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
               }
         }
     }
