@@ -55,5 +55,12 @@ pipeline {
                    sh 'docker-compose up -d'
               }
         }
+
+        stage('GRAFANA') {
+              steps {
+                    sh './opt/prometheus-2.48.0-rc.2.linux-amd64/prometheus &'
+                    sh './opt/grafana-10.2.0/bin/grafana server &'
+              }
+        }
     }
 }
