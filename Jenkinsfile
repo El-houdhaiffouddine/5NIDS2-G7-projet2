@@ -64,5 +64,39 @@ pipeline {
                     sh '/opt/grafana-10.2.0/bin/grafana server --homepath=/opt/grafana-10.2.0 &'
               }
         }
+
+        stage('MAIL') {
+              steps {
+                    emailext body: '''<!DOCTYPE html>
+                    <html lang="fr">
+                    <head>
+                      <meta charset="UTF-8">
+                      <title>Erreur dans le pipeline</title>
+                    </head>
+                    <body>
+                      <div class="container" style="width: 600px; margin: 0 auto;">
+                        <h1 style="font-size: 24px; margin-top: 0;">Erreur dans le pipeline</h1>
+                        <p style="margin-bottom: 10px;">
+                          Une erreur s\'est produite dans le pipeline. Voici les informations sur l\'erreur :
+                        </p>
+                        <ul style="list-style-type: none; margin: 0; padding: 0;">
+                          <li>
+                            <strong style="font-weight: bold;">Erreur :</strong> {{ erreur }}
+                          </li>
+                          <li>
+                            <strong style="font-weight: bold;">Source :</strong> {{ source }}
+                          </li>
+                          <li>
+                            <strong style="font-weight: bold;">Date :</strong> {{ date }}
+                          </li>
+                        </ul>
+                        <p style="margin-bottom: 10px;">
+                          Pour plus d\'informations, veuillez consulter les logs du pipeline.
+                        </p>
+                      </div>
+                    </body>
+                    </html>''', recipientProviders: [contributor()], subject: 'Jenkins email sending test', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
+              }
+        }
     }
 }
