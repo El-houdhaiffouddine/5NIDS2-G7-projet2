@@ -68,34 +68,91 @@ pipeline {
         stage('MAIL') {
               steps {
                     emailext body: '''<!DOCTYPE html>
-                    <html lang="en">
+                    <html lang="fr">
                     <head>
                         <meta charset="UTF-8">
-                        <title>Title</title>
+                        <title>Résultat du pipeline Jenkins</title>
+                        <style>
+                            body {
+                                font-family: sans-serif;
+                                font-size: 16px;
+                                color: #333;
+                                background-color: #fff;
+                            }
+
+                            h1 {
+                                font-size: 24px;
+                                margin-top: 0;
+                            }
+
+                            p {
+                                margin-bottom: 10px;
+                            }
+
+                            img {
+                                border: 2px solid #ff0000;
+                                border-radius: 5px;
+                            }
+                            ul {
+                                list-style-type: circle;
+                                list-style-position: inside;
+                                margin: 0;
+                                padding: 0;
+                            }
+
+                            li {
+                                margin-bottom: 10px;
+                                font-family: sans-serif;
+                                font-size: 16px;
+                            }
+
+                            .container {
+                                width: 600px;
+                                margin: 0 auto;
+                            }
+
+                            .header {
+                                background-color: #000;
+                                color: #fff;
+                                padding: 20px;
+                            }
+
+                            .content {
+                                padding: 20px;
+                            }
+
+                            .footer {
+                                background-color: #f0f0f0;
+                                padding: 20px;
+                            }
+                        </style>
                     </head>
                     <body>
-                          <div class="container" style="width: 600px; margin: 0 auto;">
-                              <a><img src="https://wiki.jenkins-ci.org/JENKINS/attachments/2916393/57409619.png" alt="Jenkins Logo" style="display: block; margin: 0 auto;"></a>
-                              <h1 style="font-size: 24px; margin-top: 0; color: blueviolet; ">$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:</h1>
-                              <h2 style="font-size: 24px; margin-top: 0; color: red;">Erreur dans le pipeline</h2>
-                              <p style="margin-bottom: 10px;">
-                                  Une erreur s\\\'est produite dans le pipeline. Voici les informations sur l\\\'erreur :
-                              </p>
-                              <ul style="list-style-type: none; margin: 0; padding: 0;">
-                                  <li>
-                                      <strong style="font-weight: bold;">Erreur(s) :</strong> <mark style="color: red;">$BUILD_LOG</mark>
-                                  </li>
-                                  <li>
-                                      <strong style="font-weight: bold;"> Source :</strong> <mark style="color: blue;">$BUILD_URL</mark>
-                                  </li>
-                                  <li>
-                                      <strong style="font-weight: bold; color: blue;">Projet :</strong> <mark style="color: blue;">$JOB_NAME</mark>
-                                  </li>
-                              </ul>
-                          </div>
-
+                    <div class="container">
+                        <header>
+                            <img src="https://wiki.jenkins-ci.org/JENKINS/attachments/2916393/57409619.png" alt="Jenkins Logo">
+                            <h1 style="font-size: 24px; margin-top: 0; color: blueviolet; ">$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS</h1>
+                        </header>
+                        <content>
+                            <p>Voici les détails obtenus après l\'exécution du Pipeline Jenkins:</p>
+                            <ul style="list-style-type: none; margin: 0; padding: 0;">
+                                <li>
+                                    Projet :<mark style="color: blue;">$JOB_NAME</mark>
+                                </li>
+                                <li>
+                                    Source :<mark style="color: blue;">$BUILD_URL</mark>
+                                </li>
+                                <li>
+                                    Résultat(s):<mark style="color: red;">$BUILD_LOG</mark>
+                                </li>
+                            </ul>
+                        </content>
+                        <footer>
+                            <p>Copyright © 2023. BEN SIDI EL-HOUDHAIFFOUDDINE Cybersecurity Engineering Student.</p>
+                        </footer>
+                    </div>
                     </body>
-                    </html>''', mimeType: 'text/html', subject: 'Objet: Echec d\'exécution du pipeline Jenkins', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
+                    </html>''', mimeType: 'text/html', subject: 'Objet: Résultat d\'exécution du Pipeline Jenkins pour le projet DevOps', to: 'bensidi.elhoudhaiffouddine@esprit.tn'
               }
         }
     }
