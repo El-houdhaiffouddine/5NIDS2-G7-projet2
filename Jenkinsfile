@@ -17,6 +17,13 @@ pipeline {
              }
         }
 
+        stage('OWASP DEPENDANCY-CHECK') {
+             steps {
+                  dependencyCheck additionalArguments: '--format HTML', odcInstallation: 'dp-check'
+             }
+
+        }
+
         stage('SONARQUBE') {
               steps {
                   echo '******** PHASE DE SCAN DU CODE POUR RECHERCHER LES VULNERABILITES ET LES BUGS AVEC SONARQUBE ********'
