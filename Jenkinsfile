@@ -1,7 +1,18 @@
 pipeline {
+
     agent any
 
     stages {
+
+        stage('CHECK-GIT-SECRETS') {
+            steps {
+                echo '******** PHASE D\'ANALYSE DU REPOSITORY GIT A LA RECHERCHE DES IDENTIFIANTS ********'
+                sh 'docker pull gesellix/trufflehog'
+                sh 'docker run gesellix/trufflehog --json https://github.com/El-houdhaiffouddine/5NIDS2-G7-projet2.git >git-secret-result'
+
+            }
+        }
+
         stage('GIT') {
             steps {
                 echo '******** PHASE DE RECUPERATION DU CODE SUR GITHUB ********'
@@ -19,12 +30,13 @@ pipeline {
 
         stage('OWASP DEPENDANCY-CHECK') {
              steps {
+                  echo '******** PHASE D\'ANALYSE DES COMPOSANTS DE L\'APPLICATION A LA RECHCERCHE DE VULNERABILITES ********'
                   dependencyCheck additionalArguments: '--format HTML', odcInstallation: 'dp-check'
              }
 
         }
 
-        stage('SONARQUBE') {
+        stage('SAST WITH SONARQUBE') {
               steps {
                   echo '******** PHASE DE SCAN DU CODE POUR RECHERCHER LES VULNERABILITES ET LES BUGS AVEC SONARQUBE ********'
                   sh 'mvn sonar:sonar -Dsonar.login=squ_7d0fea97567ebed576ed2e7fd0ee3ca24cab5ed1'
@@ -60,6 +72,14 @@ pipeline {
                    sh 'docker volume create kaddemdatabase'
                    sh 'docker volume create kaddemdb'
                    sh 'docker-compose up -d'
+              }
+        }
+
+        stage('DAST WITH OWASP ZAP') {
+              steps {
+                    echo '******** PHASE DE RECHERCHE DES VULNERABILITES DYNAMIQUEMENT AVEC OWASP ZAP ********'
+                    sh 'docker pull docker pull owasp/zap2docker-stable'
+                    sh 'docker run -t owasp/zap2docker-stable zap.sh -t http://192.168.1.189:8084/kaddem/ -r dast-report.html'
               }
         }
 
