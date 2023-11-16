@@ -8,7 +8,7 @@ pipeline {
             steps {
                 echo '******** PHASE D\'ANALYSE DU REPOSITORY GIT A LA RECHERCHE DES IDENTIFIANTS ********'
                 sh 'docker pull gesellix/trufflehog'
-                sh 'docker run -t gesellix/trufflehog --json https://github.com/El-houdhaiffouddine/5NIDS2-G7-projet2.git > git-secret-result'
+                sh 'docker run -t gesellix/trufflehog --json https://github.com/El-houdhaiffouddine/5NIDS2-G7-projet2.git > git-secret-result.txt'
 
             }
         }
@@ -79,7 +79,7 @@ pipeline {
               steps {
                     echo '******** PHASE DE RECHERCHE DES VULNERABILITES DYNAMIQUEMENT AVEC OWASP ZAP ********'
                     sh 'docker pull owasp/zap2docker-stable'
-                    sh 'docker run -t -d owasp/zap2docker-stable zap.sh -daemon -t http://192.168.1.189:8084/kaddem/ -r /home/zap/dast-report.html'
+                    sh 'docker run -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.1.189:8084/kaddem > dast-report.txt'
               }
         }
 
