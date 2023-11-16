@@ -79,7 +79,7 @@ pipeline {
               steps {
                     echo '******** PHASE DE RECHERCHE DES VULNERABILITES DYNAMIQUEMENT AVEC OWASP ZAP ********'
                     sh 'docker pull owasp/zap2docker-stable'
-                    sh 'docker run -t -d -v $(pwd):/zap/wrk/ owasp/zap2docker-stable zap.sh -daemon -t http://192.168.1.189:8084/kaddem/ -r dast-report.html'
+                    sh 'docker run -t -d owasp/zap2docker-stable zap.sh -daemon -t http://192.168.1.189:8084/kaddem/ -r report-folder/dast-report.html'
               }
         }
 
