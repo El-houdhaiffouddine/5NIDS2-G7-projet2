@@ -79,7 +79,7 @@ pipeline {
               steps {
                     echo '******** PHASE DE RECHERCHE DES VULNERABILITES DYNAMIQUEMENT AVEC OWASP ZAP ********'
                     sh 'docker pull owasp/zap2docker-stable'
-                    sh 'docker run -t ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.1.189:8084/kaddem > dast-report.txt'
+                    sh 'docker run -t -d ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.1.189:8084/kaddem > dast-report.txt'
               }
         }
 
