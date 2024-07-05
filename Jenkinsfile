@@ -60,7 +60,7 @@ pipeline {
         stage('DOCKER HUB') {
               steps {
                    echo '******** PHASE DE DEPOT DE NOTRE IMAGE DANS LE REPOSITORY PUBLIQUE DOCKER HUB ********'
-                   sh 'docker login -u b2ben -p elhouD@#1998'
+                   sh 'docker login --config ~/.docker/config.json'
                    sh 'docker tag elhoudhaiffouddinebensidi-5nids2-g7-projet2:1.0.0 b2ben/elhoudhaiffouddinebensidi-5nids2-g7-projet2:1.0.0'
                    sh 'docker push b2ben/elhoudhaiffouddinebensidi-5nids2-g7-projet2:1.0.0'
               }
@@ -75,11 +75,12 @@ pipeline {
               }
         }
 
-        stage('DAST WITH OWASP ZAP') {
+        stage('DAST WITH Arachni') {
               steps {
-                    echo '******** PHASE DE RECHERCHE DES VULNERABILITES DYNAMIQUEMENT AVEC OWASP ZAP ********'
-                    sh 'docker pull owasp/zap2docker-stable'
-                    sh 'docker run -t -d ghcr.io/zaproxy/zaproxy:stable zap-full-scan.py -t http://192.168.1.189:8084/kaddem > dast-report.txt'
+                    echo '******** PHASE DE RECHERCHE DES VULNERABILITES DYNAMIQUEMENT AVEC Arachni ********'
+                    sh 'git clone https://github.com/Arachni/arachni.git'
+                    sh '/home/ubuntu/arachni/bin/arachni --checks=* --report-save-path=~/arachni/result/kaddem.afr --output-only-positives --browser-cluster-job-timeout=30 --snapshot-save-path=$FILE http://192.168.1.189:8084/kaddem'
+                    sh '/home/ubuntu/arachni/bin/arachni_reporter --reporter=html:outfile=~/arachni/result/arachni.html ~/arachni/result/kaddem.afr'
               }
         }
 
